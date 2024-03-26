@@ -23,8 +23,8 @@ class RedirectIfAuthenticated
             return redirect('admin/profile');
         }
 
-        if ($guard == "user" && Auth::guard($guard)->check()) {
-            return redirect('user/profile');
+        if ($guard == "teacher" && Auth::guard($guard)->check()) {
+            return redirect('teacher/profile');
         }
         if (Auth::guard($guard)->check()) {
             return redirect()->route('home');
