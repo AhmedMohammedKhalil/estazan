@@ -4,62 +4,35 @@ namespace App\Http\Controllers;
 
 use App\Models\Teacher;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class TeacherController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
-    {
-        //
+    public function showLoginForm() {
+        return view('teachers.login');
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
+
+    public function showRegisterForm() {
+        return view('teachers.register');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
+
+    public function profile() {
+        return view('teachers.profile',['page_name' => 'البروفايل']);
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Teacher $teacher)
-    {
-        //
+    public function settings() {
+        return view('teachers.settings',['page_name' => 'الإعدادات']);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Teacher $teacher)
-    {
-        //
+    public function changePassword() {
+        return view('teachers.changePassword',['page_name' => 'تعديل كلمة السر']);
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Teacher $teacher)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Teacher $teacher)
-    {
-        //
+    public function logout(Request $request) {
+        Auth::guard('teacher')->logout();
+        $request->session()->invalidate();
+        return redirect()->route('home');
     }
 }
