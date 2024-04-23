@@ -1,4 +1,4 @@
-@extends('users.layout')
+@extends('teachers.layout')
 @section('section')
-    <livewire:user.settings />
+    <livewire:teacher.settings />
 @endsection

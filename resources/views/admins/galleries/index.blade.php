@@ -1,59 +1,66 @@
-@extends('admins.layout')
-@section('header')
-<div class="uni-banner blog-uni-banner">
-    <div class="container">
-        <div class="uni-banner-text-area">
-            <h1>إدارة معرض الصور </h1>
-        </div>
-    </div>
-</div>
-@endsection
+@extends('admins.layout',['page_name' => 'إدارة معرض الصور'])
+
+
 @section('section')
-<div class="shopping-cart ptb-100">
-    <div class="container">
-        <div class="cart-table-area">
-            <div class="cart-header-area">
-                <div class="row align-items-center">
-                    <div class="col-lg-5 col-md-5 col-sm-4 col-12">
-                        <a class="default-button dfb"  href="{{ route('admin.gallaries.create') }}"><span>إضافة صورة</span></a>
+
+<div class="instructor-content">
+
+    <section class="cart-area">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 col-md-12">
+                    <div class="cart-wraps">
+                        <div class="coupon-cart">
+                            <div class="row">
+                                <div class="col-lg-4 col-sm-5 offset-lg-4 text-center">
+                                    <a href="{{ route('admin.gallaries.create') }}" class="default-btn update mx-auto">
+                                        اضف صورة جديد
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="cart-table mt-4 table-responsive">
+                            <table class="table table-bordered ">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">الصورة</th>
+                                        <th scope="col">الاعدادات</th>
+
+                                    </tr>
+                                </thead>
+                                @if (count($gallaries) > 0)
+                                    <tbody>
+                                        @foreach ($gallaries as $gallary)
+                                            <tr>
+                                                <td class="product-name">
+                                                    <a href="javascript:void(0)">
+                                                        <img style="width:50px;height:50px" src="{{asset('img/gallaries/'.$gallary->id.'/'.$gallary->image)}}" alt="item">
+                                                    </a>
+                                                </td>
+                                                <td class="product-subtotal">
+                                                    <a title="تعديل" href="{{ route('admin.gallaries.edit', ['gallary_id'=>$gallary->id]) }}"
+                                                        >
+                                                        <i class="fa-solid fa-pen-to-square"></i>
+                                                    </a>
+                                                    <form style="display: inline-block" action="{{ route('admin.gallaries.delete',['id'=>$gallary->id]) }}" method="post">
+                                                        @method('delete')
+                                                        @csrf
+                                                        <button title="حذف" type="submit" style="background-color:unset"><i class="fa fa-trash" style="margin-right: 10px;"></i></button>
+                                                    </form>
+                                                </td>
+                                            </tr>
+                                        @endforeach
+                                    </tbody>
+                                @endif
+                            </table>
+                        </div>
                     </div>
                 </div>
             </div>
-            <div class="table-responsive">
-                <table class="table align-middle table-bordered">
-                    <thead class="table-light">
-                        <tr>
-                            <th scope="col">#</th>
-                            <th scope="col">الصورة</th>
-                            <th scope="col">الأعدادات</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach ($gallaries as $gallery)
-                            <tr>
-                                <td>{{ $loop->iteration }}</td>
-                                @if($gallery->image)
-                                <td><img style="height: 100px" src="{{ asset('assets/images/galleries/'.$gallery->id.'/'.$gallery->image) }}" alt="image"></td>
-                                @else
-                                <td><img style="height: 100px" src="{{ asset('assets/images/about/about1.jpg') }}" alt="image"></td>
-                                @endif
-                                <td>
-                                    <a title="تعديل"  href="{{ route('admin.gallaries.edit',['gallary_id'=>$gallery->id]) }}" class="edit" style="color:green;font-size:20px">
-                                        <i class="fa fa-edit"></i>
-                                    </a>
-                                    <form style="display: inline-block" action="{{ route('admin.gallaries.delete',['id'=>$gallery->id]) }}" method="post">
-                                        @method('delete')
-                                        @csrf
-                                        <button class="remove" style="background: unset;border:unset" title="حذف" type="submit"><i class="fa fa-trash" style="color:red;font-size:20px"></i></button>
-                                    </form>
-                                </td>
-                            </tr>
-                        @endforeach
-
-                    </tbody>
-                </table>
-            </div>
         </div>
-    </div>
+    </section>
+
 </div>
+
+
 @endsection

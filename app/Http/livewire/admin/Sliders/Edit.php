@@ -4,6 +4,7 @@ namespace App\Http\Livewire\Admin\Sliders;
 
 use App\Models\Sliders;
 use Livewire\Component;
+use App\Helper\ImageStore;
 use Livewire\WithFileUploads;
 use Illuminate\Support\Facades\File;
 
@@ -51,11 +52,7 @@ class Edit extends Component
             $this->updatedImage();
             $imagename = $this->image->getClientOriginalName();
             $this->slider->update(array_merge($validatedata, ['image' => $imagename]));
-            $dir = public_path('img/sliders/'.$this->slider->id);
-            if (file_exists($dir))
-                File::deleteDirectory($dir);
-            mkdir($dir);
-            $this->image->storeAs('sliders/'.$this->slider->id, $imagename);
+            ImageStore::store('img/sliders/' . $this->slider->id,$this->image,$imagename);
             File::deleteDirectory(public_path('img/livewire-tmp'));
         }
         session()->flash('message', "تم إتمام العملية بنجاح");

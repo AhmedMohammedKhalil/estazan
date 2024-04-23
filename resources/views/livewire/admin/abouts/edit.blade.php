@@ -1,6 +1,3 @@
-
-
-
 <section class="user-area-style ptb-100">
     <div class="container">
         <div class="log-in-area">

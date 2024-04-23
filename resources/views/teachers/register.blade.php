@@ -1,4 +1,4 @@
 @extends('layouts.app')
 @section('content')
-    <livewire:user.register />
+    <livewire:teacher.register />
 @endsection

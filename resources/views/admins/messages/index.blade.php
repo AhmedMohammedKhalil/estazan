@@ -1,41 +1,53 @@
-@extends('admins.layout')
-@section('header')
-<div class="uni-banner blog-uni-banner">
-    <div class="container">
-        <div class="uni-banner-text-area">
-            <h1>جميع الرسائل</h1>
-        </div>
-    </div>
-</div>
-@endsection
-@section('section')
-<div class="shopping-cart ptb-100">
-    <div class="container">
-        <div class="cart-table-area">
-            <div class="table-responsive">
-                <table class="table align-middle table-bordered">
-                    <thead class="table-light">
-                        <tr>
-                            <th scope="col">#</th>
-                            <th scope="col">الإسم</th>
-                            <th scope="col">البريد الألكترونى</th>
-                            <th scope="col">المحتوى</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach ($messages as $message)
-                            <tr>
-                                <td>{{ $loop->iteration }}</td>
-                                <td class="pd-name">{{ $message->name }}</td>
-                                <td class="pd-name">{{ $message->email }}</td>
-                                <td class="pd-name">{{ $message->message }}</td>
-                            </tr>
-                        @endforeach
+@extends('admins.layout',['page_name'=> 'جميع الرسائل' ])
 
-                    </tbody>
-                </table>
+
+@section('section')
+<div class="instructor-content">
+
+    <section class="cart-area">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 col-md-12">
+                    <div class="cart-wraps">
+                        <div class="cart-table mt-4 table-responsive">
+                            <table class="table table-bordered ">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">#</th>
+                                        <th scope="col">الإسم</th>
+                                        <th scope="col">البريد الإلكترونى</th>
+                                        <th scope="col">الرسالة</th>
+                                    </tr>
+                                </thead>
+                                @if (count($messages) > 0)
+                                    <tbody>
+                                        @foreach ($messages as $m)
+                                            <tr>
+                                                <td class="product-name">
+                                                    {{ $loop->iteration }}
+                                                </td>
+                                                <td class="product-name">
+                                                    <a href="javascript:void(0)">{{ $m->name }}</a>
+                                                </td>
+                                                <td class="product-name">
+                                                    <a href="javascript:void(0)">{{ $m->email }}</a>
+                                                </td>
+                                                <td class="product-name">
+                                                    <a href="javascript:void(0)" style="text-wrap:wrap">{!! nl2br($m->message) !!}</a>
+                                                </td>
+                                            </tr>
+                                        @endforeach
+                                    </tbody>
+
+                            </table>
+                            @endif
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
+    </section>
+
 </div>
+
 @endsection

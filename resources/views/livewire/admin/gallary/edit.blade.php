@@ -1,29 +1,39 @@
-<div class="login-form" style="">
-    <form wire:submit.prevent='edit'>
-        @if (session()->has('error'))
-            <div class="alert alert-danger">
-                {{ session('error') }}
+
+<section class="user-area-style ptb-100">
+    <div class="container">
+        <div class="log-in-area">
+            <div class="section-title">
+                <h2>تعديل صورة</h2>
             </div>
-        @endif
+            <div class="contact-form-action">
+                <form wire:submit.prevent='edit'>
+                    <div class="row">
+                        @if (session()->has('error'))
+                        <div class="alert alert-danger">
+                            {{ session('error') }}
+                        </div>
+                        @endif
 
-        <fieldset>
-            <legend>تعديل صورة المعرض </legend>
-            <div class="row">
+
+                        <div class="col-12">
+                            <div class="form-group">
+                                <label>الصورة</label>
+                                <input class="form-control" type="file" name="image" wire:model='image' id="image" />
+                                @error('image')
+                                <span class="text-danger error">{{ $message }}</span>
+                                @enderror
+                            </div>
+                        </div>
 
 
-                <div class="col-lg-12 col-md-12">
-                    <div class="form-group">
-                        <label class="">صورة:</label>
-                        <input type="file" name="image" class="form-control" wire:model='image'
-                        placeholder="إرفع الصورة">
-                        @error('image') <span class="text-danger error">{{ $message }}</span>@enderror
+
+
+                        <div class="col-12">
+                            <button class="default-btn" type="submit">حفظ التغييرات</button>
+                        </div>
                     </div>
-                </div>
+                </form>
             </div>
-        </fieldset>
-
-
-        <button type="submit" class="default-button mt-5"><span>حفظ التغييرات</span></button>
-
-</form>
-</div>
+        </div>
+    </div>
+</section>

@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\Admin\Service;
 
+use App\Helper\ImageStore;
 use App\Models\Service;
 use Livewire\Component;
 use Livewire\WithFileUploads;
@@ -51,11 +52,7 @@ class Edit extends Component
             $this->updatedImage();
             $imagename = $this->image->getClientOriginalName();
             $this->service->update(array_merge($validatedata, ['image' => $imagename]));
-            $dir = public_path('img/services/'.$this->service->id);
-            if (file_exists($dir))
-                File::deleteDirectory($dir);
-            mkdir($dir);
-            $this->image->storeAs('services/'.$this->service->id, $imagename);
+            ImageStore::store('img/services/'.$this->service->id,$this->image,$imagename);
             File::deleteDirectory(public_path('img/livewire-tmp'));
         }
         session()->flash('message', "تم إتمام العملية بنجاح");

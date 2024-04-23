@@ -38,7 +38,7 @@ class Add extends Component
         $this->updatedImage();
         $imagename = $this->image->getClientOriginalName();
         $gallary = Gallary::create(array('image' => $imagename));
-        ImageStore::store('assets/images/galleries/'.$gallary->id,$this->image,$imagename);
+        ImageStore::store('img/gallaries/'.$gallary->id,$this->image,$imagename);
         File::deleteDirectory(public_path('livewire-tmp'));
         session()->flash('message', "تم إتمام العملية بنجاح");
         return redirect()->route('admin.gallaries.index');

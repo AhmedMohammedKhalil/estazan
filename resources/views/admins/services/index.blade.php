@@ -40,9 +40,9 @@
                                             </tr>
                                         @endforeach
                                     </tbody>
-
+                                @endif
                             </table>
-                            @endif
+
                         </div>
                     </div>
                 </div>

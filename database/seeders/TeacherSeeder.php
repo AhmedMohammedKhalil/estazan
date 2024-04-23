@@ -19,8 +19,8 @@ class TeacherSeeder extends Seeder
         $faker = Faker::create('ar_SA');
 
         Teacher::create([
-            'name' => 'مستخدم 1',
-            'email' => 'Teacher1@estezan.com',
+            'name' => $faker->name,
+            'email' => 'Teacher1@estethan.com',
             'phone' => $faker->numerify('965#####'),
             'civil_number' => $faker->numerify('############'),
             'password' => Hash::make('password'),
@@ -28,8 +28,8 @@ class TeacherSeeder extends Seeder
         ]);
 
         Teacher::create([
-            'name' => 'مستخدم 2',
-            'email' => 'Teacher2@estezan.com',
+            'name' => $faker->name,
+            'email' => 'Teacher2@estethan.com',
             'phone' => $faker->numerify('965#####'),
             'civil_number' => $faker->numerify('############'),
             'password' => Hash::make('password'),
@@ -38,8 +38,8 @@ class TeacherSeeder extends Seeder
 
 
         Teacher::create([
-            'name' => ' مستخدم 3',
-            'email' => 'Teacher3@estezan.com',
+            'name' => $faker->name,
+            'email' => 'Teacher3@estethan.com',
             'phone' => $faker->numerify('965#####'),
             'civil_number' => $faker->numerify('############'),
             'password' => Hash::make('password'),

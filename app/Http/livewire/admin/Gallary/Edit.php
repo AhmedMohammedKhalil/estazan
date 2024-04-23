@@ -30,10 +30,10 @@ class Edit extends Component
             $this->updatedImage();
             $imagename = $this->image->getClientOriginalName();
             $this->gallary->update(array_merge(array('image' => $imagename)));
-            ImageStore::store('assets/images/galleries/'.$this->gallary->id,$this->image,$imagename);
-        File::deleteDirectory(public_path('livewire-tmp'));
-        session()->flash('message', "تم إتمام العملية بنجاح");
-        return redirect()->route('admin.gallaries.index');
+            ImageStore::store('img/gallaries/'.$this->gallary->id,$this->image,$imagename);
+            File::deleteDirectory(public_path('livewire-tmp'));
+            session()->flash('message', "تم إتمام العملية بنجاح");
+            return redirect()->route('admin.gallaries.index');
     }
 
 

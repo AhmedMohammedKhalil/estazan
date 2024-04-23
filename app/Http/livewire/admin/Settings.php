@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\Admin;
 
+use App\Helper\ImageStore;
 use App\Models\Admin;
 use Livewire\WithFileUploads;
 use Illuminate\Support\Facades\Auth;
@@ -11,14 +12,14 @@ use Livewire\Component;
 class Settings extends Component
 {
     use WithFileUploads;
-    public $name='', $email='',$c_number='', $image,$admin_id='';
+    public $name='', $email='',$civil_number='', $image,$admin_id='';
 
 
     public function mount() {
         $this->admin_id = Auth::guard('admin')->user()->id;
         $this->name = Auth::guard('admin')->user()->name;
         $this->email = Auth::guard('admin')->user()->email;
-        $this->c_number = Auth::guard('admin')->user()->c_number;
+        $this->civil_number = Auth::guard('admin')->user()->civil_number;
 
     }
 
@@ -49,18 +50,14 @@ class Settings extends Component
             array_merge(
                 $this->rules,
                 [ 'email'   => ['required','email',"unique:admins,email,".$this->admin_id],
-                'c_number'   => ['required',"unique:admins,c_number,".$this->admin_id],
+                'civil_number'   => ['required',"unique:admins,civil_number,".$this->admin_id],
         ]));
         if(!$this->image)
             Admin::whereId($this->admin_id)->update($validatedata);
         if($this->image) {
             $imagename = $this->image->getClientOriginalName();
             Admin::whereId($this->admin_id)->update(array_merge($validatedata,['image' => $imagename]));
-            $dir = public_path('img/admins/'.$this->admin_id);
-            if (file_exists($dir))
-                File::deleteDirectory($dir);
-            mkdir($dir);
-            $this->image->storeAs('admins/'.$this->admin_id,$imagename);
+            ImageStore::store('img/admins/'.$this->admin_id,$this->image,$imagename);
             File::deleteDirectory(public_path('img/livewire-tmp'));
         }
         session()->flash('message', "Your Profile Updated.");

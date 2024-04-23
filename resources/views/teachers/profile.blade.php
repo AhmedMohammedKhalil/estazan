@@ -1,3 +1,3 @@
-@extends('users.layout')
+@extends('teachers.layout')
 @section('section')
 @endsection

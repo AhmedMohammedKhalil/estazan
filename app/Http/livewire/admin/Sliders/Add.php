@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\Admin\Sliders;
 
+use App\Helper\ImageStore;
 use App\Models\Sliders;
 use Livewire\Component;
 use Livewire\WithFileUploads;
@@ -24,7 +25,7 @@ class Add extends Component
     protected $rules = [
         'title' => ['required', 'max:255'],
         'content' => ['required', 'max:255'],
-        'image' => ['image', 'mimes:jpeg,jpg,png', 'max:2048']
+        'image' => ['required','image', 'mimes:jpeg,jpg,png', 'max:2048']
     ];
 
     public function updatedImage()
@@ -39,13 +40,8 @@ class Add extends Component
         $validatedata = $this->validate();
         $imagename = $this->image->getClientOriginalName();
         $slider = Sliders::create(array_merge($validatedata, ['image' => $imagename]));
-        $dir = public_path('img/sliders/' . $slider->id);
-        if (file_exists($dir))
-            File::deleteDirectory($dir);
-        mkdir($dir);
-        $this->image->storeAs('sliders/' . $slider->id, $imagename);
+        ImageStore::store('img/sliders/' . $slider->id,$this->image,$imagename);
         File::deleteDirectory(public_path('img/livewire-tmp'));
-
         session()->flash('message', "تم إتمام العملية بنجاح");
         return redirect()->route('admin.slider.index');
     }
