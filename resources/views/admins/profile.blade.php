@@ -17,8 +17,8 @@
                 <a href="#">
                     <h3>{{ auth('admin')->user()->name }}</h3>
                 </a>
-                <p>{{ auth('admin')->user()->email }}</p>
                 <p>{{ auth('admin')->user()->civil_number }}</p>
+                <p>{{ auth('admin')->user()->email }}</p>
             </div>
         </div>
     </div>

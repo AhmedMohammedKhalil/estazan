@@ -58,7 +58,7 @@ class Settings extends Component
             $imagename = $this->image->getClientOriginalName();
             Admin::whereId($this->admin_id)->update(array_merge($validatedata,['image' => $imagename]));
             ImageStore::store('img/admins/'.$this->admin_id,$this->image,$imagename);
-            File::deleteDirectory(public_path('img/livewire-tmp'));
+            File::deleteDirectory(public_path('livewire-tmp'));
         }
         session()->flash('message', "Your Profile Updated.");
         return redirect()->route('admin.profile');

@@ -1,36 +1,74 @@
-    <div style="padding: 40px 0 ">
-        <div class="login-form">
-            <form wire:submit.prevent='edit'>
-                @if (session()->has('error'))
-                    <div class="alert alert-danger">
-                        {{ session('error') }}
-                    </div>
-                @endif
-                    <div class="form-group">
-                        <input type="text" wire:model.lazy='name' id="name" class="form-control" placeholder="الإسم">
-                        @error('name') <span class="text-danger error">{{ $message }}</span>@enderror
-                    </div>
 
-                    <div class="form-group">
-                        <input type="email" wire:model.lazy='email' id="email" class="form-control" placeholder="الإيميل">
-                        @error('email') <span class="text-danger error">{{ $message }}</span>@enderror
-                    </div>
-                    <div class="form-group">
-                        <input type="text" wire:model.lazy='phone' id="phone" class="form-control" placeholder="الموبايل">
-                        @error('phone') <span class="text-danger error">{{ $message }}</span>@enderror
-                    </div>
 
-                    <div class="form-group">
-                        <input type="file" wire:model='photo' id="photo" class="form-control" placeholder="">
-                        @error('photo') <span class="text-danger error">{{ $message }}</span>@enderror
-                    </div>
+<section class="user-area-style ptb-100">
+    <div class="container">
+        <div class="log-in-area">
+            <div class="section-title">
+                <h2>تعديل البيانات</h2>
+            </div>
+            <div class="contact-form-action">
+                <form wire:submit.prevent='edit'>
+                    <div class="row">
+                        @if (session()->has('error'))
+                        <div class="alert alert-danger">
+                            {{ session('error') }}
+                        </div>
+                        @endif
+                        <div class="col-12">
+                            <div class="form-group">
+                                <label>الرقم المدنى</label>
+                                <input class="form-control" type="civil_number" name="civil_number" wire:model.lazy='civil_number' id="civil_number" />
+                                @error('civil_number')
+                                <span class="text-danger error">{{ $message }}</span>
+                                @enderror
+                            </div>
+                        </div>
 
-                    <div class="form-group">
-                        <textarea name="address" class="form-control"  wire:model.lazy='address' id="address" rows="6" placeholder="العنوان"></textarea>
-                        @error('address') <span class="text-danger error">{{ $message }}</span>@enderror
+                        <div class="col-12">
+                            <div class="form-group">
+                                <label>الإسم</label>
+                                <input class="form-control" type="name" name="name" wire:model.lazy='name' id="name" />
+                                @error('name')
+                                <span class="text-danger error">{{ $message }}</span>
+                                @enderror
+                            </div>
+                        </div>
+
+                        <div class="col-12">
+                            <div class="form-group">
+                                <label>البريد الألكترونى</label>
+                                <input class="form-control" type="email" name="email" wire:model.lazy='email'
+                                    id="email" />
+                                @error('email')
+                                <span class="text-danger error">{{ $message }}</span>
+                                @enderror
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="form-group">
+                                <label>الموبايل</label>
+                                <input class="form-control" type="text" name="phone" wire:model.lazy='phone'
+                                    id="phone" />
+                                @error('phone')
+                                    <span class="text-danger error">{{ $message }}</span>
+                                @enderror
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="form-group">
+                                <label>الصورة</label>
+                                <input class="form-control" type="file" name="image" wire:model='image' id="image" />
+                                @error('image')
+                                <span class="text-danger error">{{ $message }}</span>
+                                @enderror
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <button class="default-btn" type="submit">حفظ التغييرات</button>
+                        </div>
                     </div>
-                    <button type="submit" class="btn btn-primary">حفظ التغييرات</button>
-            </form>
+                </form>
+            </div>
         </div>
     </div>
-
+</section>

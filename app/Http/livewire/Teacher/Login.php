@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Livewire\User;
+namespace App\Http\Livewire\Teacher;
 
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
@@ -12,7 +12,7 @@ class Login extends Component
     public $password;
 
     protected $rules = [
-        'email'   => 'required|email|exists:users,email',
+        'email'   => 'required|email|exists:teachers,email',
         'password' => 'required|min:8'
     ];
 
@@ -25,7 +25,7 @@ class Login extends Component
 
     public function login(){
         $validatedData = $this->validate();
-        if(Auth::guard('user')->attempt($validatedData)){
+        if(Auth::guard('teacher')->attempt($validatedData)){
 
             session()->flash('message', "تم دخولك ينجاح");
             return redirect()->route('home');
@@ -36,6 +36,6 @@ class Login extends Component
 
     public function render()
     {
-        return view('livewire.user.login');
+        return view('livewire.teacher.login');
     }
 }
