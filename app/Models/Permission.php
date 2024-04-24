@@ -10,6 +10,10 @@ class Permission extends Model
     use HasFactory;
 
     protected $fillable = [
-        'reason','teacher_id','accepted','admin_read','teacher_read'
+        'reason','teacher_id','replyed_at','status'
     ];
+
+    public function teacher() {
+        return $this->belongsTo(Teacher::class);
+    }
 }

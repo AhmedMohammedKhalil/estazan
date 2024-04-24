@@ -15,7 +15,6 @@ return new class extends Migration
             $table->increments('id');
             $table->unsignedInteger('teacher_id');
             $table->text('content');
-            $table->integer('read')->default(0);
             $table->timestamps();
             $table->foreign('teacher_id')->references('id')->on('teachers')->onDelete('cascade');
         });

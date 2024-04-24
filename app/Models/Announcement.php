@@ -10,6 +10,10 @@ class Announcement extends Model
     use HasFactory;
 
     protected $fillable = [
-        'content', 'teacher_id','read'
+        'content', 'teacher_id'
     ];
+
+    public function teacher() {
+        return $this->belongsTo(Teacher::class);
+    }
 }

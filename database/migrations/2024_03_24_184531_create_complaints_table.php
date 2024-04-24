@@ -16,8 +16,7 @@ return new class extends Migration
             $table->unsignedInteger('teacher_id');
             $table->text('complaint_text');
             $table->text('reply')->nullable();
-            $table->integer('teacher_read')->nullable();
-            $table->integer('admin_read')->default(0);
+            $table->timestamp('replyed_at')->nullable();
             $table->timestamps();
             $table->foreign('teacher_id')->references('id')->on('teachers')->onDelete('cascade');
         });

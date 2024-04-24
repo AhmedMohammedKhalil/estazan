@@ -4,6 +4,15 @@
             <li>
                 <a href="{{ route('admin.dashboard') }}">الإحصائيات</a>
             </li>
+            <li>
+                <a href="{{ route('admin.permissions.index') }}">جميع الأذونات</a>
+            </li>
+            <li>
+                <a href="{{ route('admin.complaints.index') }}">جميع الشكاوى</a>
+            </li>
+            <li>
+                <a href="{{ route('admin.announcements.index') }}">جميع الإعلانات</a>
+            </li>
 
             <li>
                 <a href="{{ route('admin.about.index') }}">إدارة من نحن</a>

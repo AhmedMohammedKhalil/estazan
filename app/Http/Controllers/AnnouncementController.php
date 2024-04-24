@@ -12,54 +12,69 @@ class AnnouncementController extends Controller
      */
     public function index()
     {
-        //
+        $announcements = Announcement::all();
+        return view('admins.announcements.index',compact('announcements'));
     }
+
+
+    /**
+     * Display a listing of the resource.
+     */
+    public function allAnnouncements()
+    {
+        $announcements = auth('teacher')->user()->announcements;
+        return view('teachers.announcements.index',compact('announcements'));
+    }
+
 
     /**
      * Show the form for creating a new resource.
      */
     public function create()
     {
-        //
+        return view('admins.announcements.create');
+
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
-    }
+
 
     /**
      * Display the specified resource.
      */
-    public function show(Announcement $announcement)
+    public function adminShowAnnouncement(Request $request)
     {
-        //
+        $announcement = Announcement::whereId($request->id)->first();
+        return view('admins.announcements.show',compact('announcement'));
     }
+
+
+    /**
+     * Display the specified resource.
+     */
+    public function teacherShowAnnouncement(Request $request)
+    {
+        $announcement = Announcement::whereId($request->id)->first();
+        return view('teachers.announcements.show',compact('announcement'));
+    }
+
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Announcement $announcement)
+    public function edit(Request $request)
     {
-        //
+        return view('admins.announcements.edit',['announcement_id' => $request->id]);
+
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Announcement $announcement)
-    {
-        //
-    }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Announcement $announcement)
+    public function delete(Request $request)
     {
-        //
+        $announcement = Announcement::whereId($request->id)->first();
+        $announcement->delete();
+        return redirect()->route('admin.announcements.index');
     }
 }

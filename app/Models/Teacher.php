@@ -26,4 +26,33 @@ class Teacher extends Authenticatable
     protected $hidden = [
         'password',
     ];
+
+
+    public function permeissions() {
+        return $this->hasMany(Permission::class);
+    }
+
+    public function repliedpermissions() {
+        return $this->permeissions()->where('status','!=','0');
+    }
+
+    public function newpermissions() {
+        return $this->permeissions()->where('status','0');
+    }
+
+    public function complaints() {
+        return $this->hasMany(Complaint::class);
+    }
+
+    public function repliedcomplaints() {
+        return $this->complaints()->whereNotNull('reply');
+    }
+
+    public function newcomplaints() {
+        return $this->complaints()->whereNull('reply');
+    }
+
+    public function announcements() {
+        return $this->hasMany(Announcement::class);
+    }
 }

@@ -10,6 +10,10 @@ class Complaint extends Model
     use HasFactory;
 
     protected $fillable = [
-        'complaint_text', 'reply','teacher_id','admin_read','teacher_read'
+        'complaint_text', 'reply','replyed_at','teacher_id'
     ];
+
+    public function teacher() {
+        return $this->belongsTo(Teacher::class);
+    }
 }

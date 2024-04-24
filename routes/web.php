@@ -42,15 +42,6 @@ Route::middleware(['auth:admin'])->name('admin.')->prefix('admin')->group(functi
         Route::get('/', 'TeacherController@index')->name('index');
     });
 
-    // Route::prefix('/book')->name('book.')->group(function () {
-    //     Route::get('/index', 'BookController@index')->name('index');
-    //     Route::get('/create', 'BookController@create')->name('create');
-    //     Route::get('/show', 'BookController@show')->name('show');
-    //     Route::get('/edit', 'BookController@edit')->name('edit');
-    //     Route::delete('/delete', 'BookController@delete')->name('delete');
-    // });
-
-
     Route::prefix('/about')->name('about.')->group(function () {
         Route::get('/index', 'AboutsController@index')->name('index');
         Route::get('/edit', 'AboutsController@edit')->name('edit');
@@ -75,6 +66,32 @@ Route::middleware(['auth:admin'])->name('admin.')->prefix('admin')->group(functi
         Route::get('/', 'MessageController@index')->name('index');
     });
 
+
+    Route::prefix('/permissions')->name('permissions.')->group(function () {
+        Route::get('/index', 'PermissionController@allPermissions')->name('index');
+        Route::get('/show', 'PermissionController@adminShowPermission')->name('show');
+        Route::get('/accept', 'PermissionController@acceptPermission')->name('accept');
+        Route::get('/reject', 'PermissionController@rejectPermission')->name('reject');
+    });
+
+
+    Route::prefix('/complaints')->name('complaints.')->group(function () {
+        Route::get('/index', 'ComplaintController@allComplaints')->name('index');
+        Route::get('/addreply', 'ComplaintController@addreply')->name('addreply');
+        Route::get('/editreply', 'ComplaintController@editreply')->name('editreply');
+        Route::get('/show', 'ComplaintController@adminShowComplaint')->name('show');
+    });
+
+
+    Route::prefix('/announcements')->name('announcements.')->group(function () {
+        Route::get('/index', 'AnnouncementController@index')->name('index');
+        Route::get('/create', 'AnnouncementController@create')->name('create');
+        Route::get('/edit', 'AnnouncementController@edit')->name('edit');
+        Route::delete('/delete', 'AnnouncementController@delete')->name('delete');
+        Route::get('/show', 'AnnouncementController@adminShowAnnouncement')->name('show');
+
+    });
+
 });
 
 
@@ -85,6 +102,29 @@ Route::middleware(['auth:teacher'])->name('teacher.')->prefix('teacher')->group(
     Route::get('/changePassword', 'teacherController@changePassword')->name('changePassword');
     Route::get('/logout', 'teacherController@logout')->name('logout');
 
+    Route::prefix('/permissions')->name('permissions.')->group(function () {
+        Route::get('/index', 'PermissionController@index')->name('index');
+        Route::get('/create', 'PermissionController@create')->name('create');
+        Route::get('/edit', 'PermissionController@edit')->name('edit');
+        Route::delete('/delete', 'PermissionController@delete')->name('delete');
+        Route::get('/show', 'PermissionController@teacherShowPermission')->name('show');
+    });
+
+
+    Route::prefix('/complaints')->name('complaints.')->group(function () {
+        Route::get('/index', 'ComplaintController@index')->name('index');
+        Route::get('/create', 'ComplaintController@create')->name('create');
+        Route::get('/edit', 'ComplaintController@edit')->name('edit');
+        Route::delete('/delete', 'ComplaintController@delete')->name('delete');
+        Route::get('/show', 'ComplaintController@teacherShowComplaint')->name('show');
+    });
+
+
+    Route::prefix('/announcements')->name('announcements.')->group(function () {
+        Route::get('/index', 'AnnouncementController@allAnnouncements')->name('index');
+        Route::get('/show', 'AnnouncementController@teacherShowAnnouncement')->name('show');
+
+    });
 
 
 });
